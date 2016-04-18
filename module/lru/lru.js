@@ -1,8 +1,8 @@
-var lruRequire = require("module/linkedList/linkedList");
+var linkedListRequire = require("../linkedList/linkedList");
 
-module.exports = function lruRequire(maximumSize) {
+module.exports = function Lru(maximumSize) {
     var dic = {};
-    var sortedLinkedList = new LinkedList();
+    var sortedLinkedList = linkedListRequire();
 
     this.put = function(key, value) {
         if (key in dic) {
@@ -19,6 +19,11 @@ module.exports = function lruRequire(maximumSize) {
     };
 
     this.get = function(key) {
-        return dic[key];
+        if (key in dic) {
+            return dic[key];
+        }
+        return null;
     };
+
+    return this;
 };

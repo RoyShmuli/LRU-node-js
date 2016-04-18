@@ -77,4 +77,6 @@ module.exports = function linkedList(e){
         var next = null;
         var previous = null;
     };
+
+    return this;
 };

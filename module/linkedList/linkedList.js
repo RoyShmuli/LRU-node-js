@@ -1,11 +1,10 @@
-var LinkedList = function(e){
+module.exports = function linkedList(e){
 
-    var that = {};
     var first;
     var last;
 
-    that.push = function(value){
-        var node = new Node(value);
+    this.push = function(key, value){
+        var node = new Node(key, value);
 
         if (first == null) {
             first = last = node;
@@ -14,15 +13,17 @@ var LinkedList = function(e){
             last.next = node;
             last = node;
         }
+
+        return Node;
     };
 
-    that.pop = function() {
+    this.pop = function() {
         var value = first;
         first = first.next;
         return value;
     };
 
-    that.remove = function(index) {
+    this.remove = function(index) {
         var i = 0;
         var current = first;
         var previous;
@@ -43,7 +44,7 @@ var LinkedList = function(e){
         return current.value;
     };
 
-    that.moveToLast = function(node) {
+    this.moveToLast = function(node) {
         if (node.previous == null) {
             if (node.next != null) {
                 node.next.previous = null;
@@ -54,10 +55,14 @@ var LinkedList = function(e){
 
         if (node.next != null) {
             node.next.previous = node.previous;
+        } else {
+            last = node.previous;
         }
 
         if (node.previous != null) {
             node.previous.next = node.next;
+        } else {
+            first = node.next;
         }
 
         node.next = null;
@@ -66,11 +71,10 @@ var LinkedList = function(e){
         last = node;
     };
 
-    var Node = function(value){
+    var Node = function(key, value){
+        this.value = key;
         this.value = value;
         var next = null;
         var previous = null;
     };
-
-    return that;
 };
